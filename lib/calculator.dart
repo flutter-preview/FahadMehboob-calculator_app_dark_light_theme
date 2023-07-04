@@ -61,9 +61,6 @@ class SimpleCalculatorState extends State<SimpleCalculator> {
 
   void evaluate() {
     setState(() {
-      equationFontSize = 38.0;
-      resultFontSize = 48.0;
-
       expression = equation;
       expression = expression.replaceAll('×', '*');
       expression = expression.replaceAll('÷', '/');
@@ -82,8 +79,6 @@ class SimpleCalculatorState extends State<SimpleCalculator> {
 
   void addToEquation(String buttonText) {
     setState(() {
-      equationFontSize = 48.0;
-      resultFontSize = 38.0;
       if (equation == "0") {
         equation = buttonText;
       } else {
@@ -99,7 +94,7 @@ class SimpleCalculatorState extends State<SimpleCalculator> {
       theme: isDarkMode ? ThemeData.dark() : ThemeData.light(),
       home: Scaffold(
         appBar: AppBar(
-          backgroundColor: isDarkMode ? Colors.red : Colors.amber,
+          backgroundColor: isDarkMode ? Colors.teal : Colors.cyan,
           title: const Text("Calculator App"),
           actions: [
             IconButton(
@@ -110,12 +105,15 @@ class SimpleCalculatorState extends State<SimpleCalculator> {
         ),
         body: Column(
           children: <Widget>[
+            const SizedBox(
+              height: 100,
+            ),
             Container(
               alignment: Alignment.centerRight,
               padding: const EdgeInsets.fromLTRB(10, 20, 10, 0),
               child: Text(
                 equation,
-                style: TextStyle(fontSize: equationFontSize),
+                style: const TextStyle(fontSize: 37, fontFamily: "Roboto"),
               ),
             ),
             Container(
@@ -123,7 +121,7 @@ class SimpleCalculatorState extends State<SimpleCalculator> {
               padding: const EdgeInsets.fromLTRB(10, 30, 10, 0),
               child: Text(
                 result,
-                style: TextStyle(fontSize: resultFontSize),
+                style: const TextStyle(fontSize: 106, fontFamily: "Roboto"),
               ),
             ),
             const Expanded(
@@ -138,17 +136,17 @@ class SimpleCalculatorState extends State<SimpleCalculator> {
                     children: [
                       TableRow(children: [
                         MyButton(
-                          title: "CE",
+                          title: "AC",
                           isDarkMode: isDarkMode,
                           onPressed: () {
                             clear();
                           },
                         ),
                         MyButton(
-                          title: "AC",
+                          title: "⌫",
                           isDarkMode: isDarkMode,
                           onPressed: () {
-                            clear();
+                            delete();
                           },
                         ),
                         MyButton(
@@ -229,14 +227,12 @@ class SimpleCalculatorState extends State<SimpleCalculator> {
                         ),
                       ]),
                       TableRow(children: [
-                        Expanded(
-                          child: MyButton(
-                            title: "0",
-                            isDarkMode: isDarkMode,
-                            onPressed: () {
-                              addToEquation("0");
-                            },
-                          ),
+                        MyButton(
+                          title: "0",
+                          isDarkMode: isDarkMode,
+                          onPressed: () {
+                            addToEquation("0");
+                          },
                         ),
                         MyButton(
                           title: ".",

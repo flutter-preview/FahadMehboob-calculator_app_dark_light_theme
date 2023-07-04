@@ -13,7 +13,7 @@ class EqualBtn extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(5),
           child: Container(
-            height: 175,
+            height: 162,
             alignment: Alignment.center,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
